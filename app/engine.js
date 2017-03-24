@@ -20,11 +20,16 @@ const mapping = {
     ArrowRight: 'right'
 };
 
-let state = {
+let input = {
     down: false,
     up: false,
     left: false,
-    right: false
+    right: false,
+    mouse: {
+        click: false,
+        x: null,
+        y: null
+    }
 };
 
 export function start(_canvas, _debug) {
@@ -59,13 +64,15 @@ export function removeComputable(instance) {
 
 
 function update() {
+
     computables.forEach(function (computable) {
         if (typeof computable.compute === 'function') {
-            computable.compute(state);
+            computable.compute(input);
         } else {
             console.warn('Computable without compute function!');
         }
     });
+    input.mouse.click = false;
 }
 
 function draw(delta) {
@@ -100,12 +107,22 @@ function drawLoop() {
 function bindInput() {
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('keyup', onKeyUp);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('click', onMouseClick);
+}
+
+function onMouseMove(e){
+    input.mouse.x = e.clientX;
+    input.mouse.y = e.clientY;
+}
+function onMouseClick(){
+    input.mouse.click = true;
 }
 
 function onKeyDown(e) {
-    state[mapping[e.key]] = true;
+    input[mapping[e.key]] = true;
 }
 
 function onKeyUp(e) {
-    state[mapping[e.key]] = false;
+    input[mapping[e.key]] = false;
 }
