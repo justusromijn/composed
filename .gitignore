@@ -1,0 +1,8 @@
+# IDE
+.idea/*
+
+# LIB
+node_modules/
+
+# DIST
+dist/

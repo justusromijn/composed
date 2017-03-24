@@ -1,0 +1,23 @@
+{
+  "name": "composed",
+  "version": "1.0.0",
+  "description": "Game with audiostuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "./node_modules/.bin/webpack"
+  },
+  "keywords": [
+    "audio",
+    "game"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justusromijn/composed.git"
+  },
+  "author": "Justus Romijn <justus.romijn@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^2.3.1"
+  }
+}
