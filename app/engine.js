@@ -12,11 +12,16 @@ let updateStart = 0,
     canvas = null,
     ctx = null;
 
+export let state = {
+
+};
+
 export function start(_canvas) {
     console.log('starting engine.');
     canvas = _canvas;
     ctx = canvas.getContext('2d');
 
+    bindInput();
     updateLoop();
     drawLoop();
 }
@@ -52,8 +57,9 @@ function update() {
 
 function draw(delta) {
     drawables.forEach(function(drawable){
+
         if (typeof drawable.draw === 'function'){
-            drawable.draw(delta);
+            drawable.draw(ctx, delta);
         } else {
             console.warn('Drawable without draw function!');
         }
@@ -75,4 +81,18 @@ function drawLoop() {
     delta = (performance.now() - updateEnd) / FRAMERATE || 1;
     draw(delta);
     requestAnimationFrame(drawLoop);
+}
+
+function bindInput(){
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('keyup', onKeyUp);
+}
+
+function onKeyDown(e){
+    // var key = e.key || e.which || e.keyCode || 0;
+    // console.log(event);
+}
+
+function onKeyUp(event){
+
 }
